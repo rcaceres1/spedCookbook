@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/teachers', {useNewUrlParser: true});
+mongoose.connect(process.env.DATABASE_URL || 'mongodb://localhost:27017/teachers', {
+    useNewUrlParser: true
+});
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
