@@ -4,7 +4,7 @@ var passport = require('passport');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', {user: req.user, title: 'SPED Cookbook' });
 });
 
 router.get('/auth/google', passport.authenticate(

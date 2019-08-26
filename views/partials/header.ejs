@@ -9,6 +9,19 @@
 </head>
 <body>
     <nav>
+        <a href="#">Homepage</a>
+        <a href="#">My Account</a>
+        <a href="#">All Activites</a>
+        <ul>
+                <li>
+                    <% if (user) { %>
+                        <a href="/logout"><i class="#">trending_flat</i>Log Out</a>
+                    <% } else { %>
+                        <a href="/auth/google"><i class="#">vpn_key</i>Login with Google</a>
+                    <% } %>
+                </li>
+            </ul>
+
         
     </nav>
 <main>

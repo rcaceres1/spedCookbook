@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var teacherSchema = new Mongoose.Schema({
+var studentSchema = new Schema({
+    name: String,
+    studentId: String,
+    grade: Number,
+});
+
+var teacherSchema = new Schema({
     name: String,
     email: String, 
     school: String,
@@ -8,13 +15,6 @@ var teacherSchema = new Mongoose.Schema({
     googleId: String
 }, {
     timestamps: true
-});
-
-var studentSchema = new Mongoose.Schema({
-    name: String,
-    studentId: String,
-    grade: Number, 
-    //acivityAssigned?
 });
 
 module.exports = mongoose.model('Teacher', teacherSchema);
