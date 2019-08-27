@@ -8,6 +8,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var teachersRouter = require('./routes/teachers');
+var activityRouter = require('./routes/activities');
 
 var app = express();
 require('dotenv').config();
@@ -23,17 +24,21 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'spedTeachersRock!',
   resave: false,
   saveUninitialized: true
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', indexRouter);
-app.use('/teachers', teachersRouter);
+app.use('/', teachersRouter);
+app.use('/activities', activityRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

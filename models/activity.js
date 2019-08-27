@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 
-var activitySchema = new Mongoose.Schema({
+var commentSchema = new mongoose.Schema({
+    content: String,
+    rating: { type: String, min: 'D', max: 'A', default: 'A'}
+}, {
+    timestamps: true
+});
+
+var activitySchema = new mongoose.Schema({
     name: String,
     materials: String,
     activPic: String,
@@ -10,10 +17,4 @@ var activitySchema = new Mongoose.Schema({
     timestamps: true
 });
 
-var commentSchema = new Mongoose.Schema({
-    content: String,
-    rating: { type: String, min: 'D', max: 'A', default: 'A'}
-}, {
-    timestamps: true
-});
 module.exports = mongoose.model('Activity', activitySchema);

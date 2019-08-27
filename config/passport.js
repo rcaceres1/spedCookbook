@@ -1,6 +1,6 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
-var Teacher = ('../models/teacher');
+var Teacher = require('../models/teacher');
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -8,30 +8,30 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK
 }, 
 function(accessToken, refreshToken, profile, cb) {
-    Teacher.findOne({ 'googleId': profile.id}, function(err, teacher) {
+    Teacher.findOne({googleId: profile.id}, function(err, user) {
         if(err) return cb(err);
-        if(teacher) {
-            return cb(null, teacher);
+        if(user) {
+            return cb(null, user);
         } else {
-            var newTeacher = new Teacher({
+            var newUser = new Teacher ({
                 name: profile.displayName,
                 email: profile.emails[0].value,
                 googleId: profile.id
             });
-            newTeacher.save(function(err) {
+            newUser.save(function(err) {
                 if(err) return cb(err);
-                return cb(null, newTeacher);
+                return cb(null, newUser);
             });
         }
     });
 }
 ));
 
-passport.serializeUser(function(teacher, done) {
-    done(null, teacher.id);
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
 });
 passport.deserializeUser(function(id, done) {
-    Teacher.findById(id, function(err, teacher) {
-        done(err, teacher);
+    Teacher.findById(id, function(err, user) {
+        done(err, user);
     });
 });
