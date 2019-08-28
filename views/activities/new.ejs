@@ -1,4 +1,14 @@
 <%- include('../partials/header') %>
 <h1>Add a New Activity!</h1>
 
+<form id="new-form" action="/activities" method="POST">
+    <label>Name:</label>
+    <input type="text" name="name">
+    <label>Materials:</label>
+    <textarea name="materials" id="" cols="30" rows="10"></textarea>
+    <label>Directions</label>
+    <textarea name="directions" id="" cols="30" rows="10"></textarea>
+    <input type="submit" value="Add Activity">
+</form>
+
 <%- include('../partials/footer') %>

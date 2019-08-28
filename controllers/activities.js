@@ -13,6 +13,7 @@ module.exports = {
 function activity(req, res) {
     Activity.findById(req.params.id, function(err, activity) {
         res.render('activities/activity', {
+            user: req.user,
             activity
         });
     });
@@ -23,32 +24,31 @@ function activity(req, res) {
 function index(req, res) {
     Activity.find({}, (err, activities) => {
         res.render('activities/all', { 
-        activities,
-        user: req.user 
+        user: req.user,
+        activities
     })
     }) 
 }
 
 // should be good
 function add(req,res) {
-    Activity.add(req.body, function(err, activity) {
+    Activity.create(req.body, function(err, activity) {
         res.redirect('/activities');
     });
 }
 
 /// This will need to be refactored 
 function update(req, res) {
-    Activity.findById(req.params.id, function(err, activity) {
-        // activity.activities.push(req.body);
-        activity.save(function(err, activity) {
-            res.redirect(`/activities/${activity._id}`);
-        });
+    Activity.findOneAndUpdate(req.params.id, req.body, function(err, activity) {
+        res.redirect(`/activities/${req.params.id}`)
     });
 }
 
 // should be good
 function newAct(req, res) {
-    res.render('activities/new', {title: 'Add Activity'});
+    res.render('activities/new', {
+        user: req.user,
+        title: 'Add Activity'});
 }
 
 // this one should be good

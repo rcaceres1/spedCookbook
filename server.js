@@ -1,10 +1,13 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+//middleware
 var session = require('express-session');
 var passport = require('passport');
-var logger = require('morgan');
+var methodOverride = require('method-override');
+
 
 var indexRouter = require('./routes/index');
 var teachersRouter = require('./routes/teachers');
@@ -20,6 +23,7 @@ require('./config/passport');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(methodOverride('_method'));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -1,4 +1,19 @@
 <%- include('../partials/header') %>
 <h1>All Activities</h1>
+<a href="/activities/new">Add a new activity here!</a>
+
+<% activities.forEach(function(a) { %>
+    <section>
+      <a href="/activities/<%= a._id %>">
+        <div>Name: <%= a.name %></div>
+      </a>
+      <% if(a.activPic) { %>
+        <img src="<%= a.activPic %>" alt="<%= a.name %>" />
+      <% } %>
+      <form action="/activities/<%= a._id %>?_method=DELETE" method="POST" class="delete">
+        <button type="submit">Delete Activity</button>
+      </form>
+    </section>
+<% }) %>
 
 <%- include('../partials/footer') %>

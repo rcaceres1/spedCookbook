@@ -1,4 +1,19 @@
 <%- include('../partials/header') %>
-<h1>Activity Page</h1>
+
+<h1>Activity</h1>
+<h3><%= activity.name %></h3>
+<p><%= activity.materials %></p>
+<p><%= activity.directions %></p>
+
+<h3>Edit the activity here!</h3>
+<form action="/activities/<%= activity._id %>?_method=PUT" method="POST">
+    <label>Name:</label>
+    <input type="text" name="name" value="<%= activity.name %>">
+    <label>Materials:</label>
+    <textarea name="materials" value="<%= activity.materials %>" cols="30" rows="10"></textarea>
+    <label>Directions</label>
+    <textarea name="directions" value="<%= activity.directions %>" cols="30" rows="10"></textarea>
+    <input type="submit" value="Update Activity">
+</form>
 
 <%- include('../partials/footer') %>
