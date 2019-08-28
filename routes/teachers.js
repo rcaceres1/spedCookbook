@@ -6,7 +6,7 @@ var teacherCntrl = require('../controllers/teachers');
 /* GET users listing. */
 
 router.get('/teachers', teacherCntrl.index);
-router.get('/teachers/:id/account', teacherCntrl.account);
+router.get('/teachers/:id/account', isLoggedIn, teacherCntrl.account);
 
 
 router.get('/', function(req, res, next) {
@@ -17,5 +17,5 @@ function isLoggedIn(req, res, next) {
   if ( req.isAuthenticated() ) return next();
   res.redirect('/auth/google');
 }
-``
+
 module.exports = router;

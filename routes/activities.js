@@ -8,24 +8,28 @@ router.get('/:id', activityCntrl.activity);
 // @ POST
 // @ PRIVATE
 // @ add an activity to the db
-router.post('/', activityCntrl.add); //same as create
+router.post('/', isLoggedIn, activityCntrl.add);
 
 // @ PUT
 // @ PRIVATE
 // @ update an activity (serve a form to update)
-router.put('/:id/edit', activityCntrl.update);
+router.put('/:id/edit', isLoggedIn, activityCntrl.update);
 
 // @ DELETE
 // @ PRIVATE
 // @ delete an activity
-router.delete('/:id/delete', activityCntrl.delete);
+router.delete('/:id/delete', isLoggedIn, activityCntrl.delete);
 
 
 // @ GET
 // @ PRIVATE
 // @ serves form to add activity
-router.get('/:id/new', activityCntrl.new); //same as newFlight
+router.get('/:id/new', isLoggedIn, activityCntrl.new); 
 
 // authorization function here
+function isLoggedIn(req, res, next) {
+    if ( req.isAuthenticated() ) return next();
+    res.redirect('/auth/google');
+  }
 
 module.exports = router;

@@ -19,6 +19,7 @@ function activity(req, res) {
 }
 
 // show all
+// looks right 
 function index(req, res) {
     Activity.find({}, (err, activities) => {
         res.render('activities/all', { 
@@ -28,28 +29,31 @@ function index(req, res) {
     }) 
 }
 
+// should be good
 function add(req,res) {
     Activity.add(req.body, function(err, activity) {
         res.redirect('/activities');
     });
 }
 
+/// This will need to be refactored 
 function update(req, res) {
     Activity.findById(req.params.id, function(err, activity) {
-        activity.activities.push(req.body);
+        // activity.activities.push(req.body);
         activity.save(function(err, activity) {
             res.redirect(`/activities/${activity._id}`);
         });
     });
 }
 
+// should be good
 function newAct(req, res) {
     res.render('activities/new', {title: 'Add Activity'});
 }
 
+// this one should be good
 function deleteAct(req, res) {
-    Activity.findOne({'activities._id': req.params.id}, function(err, activity) {
-        activities.id(req.params.id).remove();
+    Activity.findOneAndDelete(req.params.id, function(err) {
         res.redirect('/activities');
     });
 }
