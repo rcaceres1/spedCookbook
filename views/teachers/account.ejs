@@ -1,12 +1,25 @@
 <%- include('../partials/header') %>
-<h1>My Account Page</h1>
-<section>
+<h1 class="title is-1">My Account Page</h1>
+<!-- <section>
     <div>Name:</div>
     <div><%= teacher.name %></div>
     <div>Email:</div>
     <div><%= teacher.email %></div>
-    <div>School:</div>
-    <div><%= teacher.school %></div>
-</section>
+</section> -->
+
+<div class="tile is-ancestor">
+<div class="tile is-vertical is-8">
+    <div class="tile">
+    <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification is-warning">
+        <p class="title">Name:</p>
+        <p class="subtitle"><%= teacher.name %></p>
+        <p class="title">Email:</p>
+        <p class="subtitle"><%= teacher.email %></p>
+        </article>
+    </div>
+    </div>
+</div>
+</div>
 
 <%- include('../partials/footer') %>

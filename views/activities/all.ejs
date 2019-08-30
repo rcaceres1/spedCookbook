@@ -1,19 +1,33 @@
 <%- include('../partials/header') %>
-<h1>All Activities</h1>
-<a href="/activities/new">Add a new activity here!</a>
+ <h1 class="title is-1">All Activities</h1>
+ <a href="/activities/new" class="button is-info is-focused">Add a new actvity!</a>
+ <br>
+ <br>
+  <% activities.forEach(function(a) { %>
 
-<% activities.forEach(function(a) { %>
-    <section>
-      <a href="/activities/<%= a._id %>">
-        <div>Name: <%= a.name %></div>
-      </a>
-      <% if(a.activPic) { %>
-        <img src="<%= a.activPic %>" alt="<%= a.name %>" />
-      <% } %>
-      <form action="/activities/<%= a._id %>?_method=DELETE" method="POST" class="delete">
-        <button type="submit">Delete Activity</button>
-      </form>
-    </section>
+    <div class="tile is-ancestor">
+        <div class="tile is-vertical is-8">
+          <div class="tile">
+            <div class="tile is-parent is-vertical">
+              <article class="tile is-child notification is-warning">
+              <article>
+                <p>
+                  <a class="title" href="/activities/<%= a._id %>">
+                    <div><%= a.name %></div>
+                  </a>
+                </p>
+              </article>
+              <br>
+                <article>
+                    <form action="/activities/<%= a._id %>?_method=DELETE" method="POST" class="delete">
+                      <button type="submit" class="button is-danger is-focused">Delete Activity</button>
+                    </form>
+                </article>
+            </article>
+            </div>
+          </div>
+        </div>
+      </div>
 <% }) %>
 
 <%- include('../partials/footer') %>

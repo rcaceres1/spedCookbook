@@ -2,10 +2,10 @@ const Activity = require('../models/activity');
 
 module.exports = {
     activity,
+    delete: deleteAct,
     index, 
     add, 
     update, 
-    delete: deleteAct,
     new: newAct
 }
 
@@ -16,6 +16,11 @@ function activity(req, res) {
             user: req.user,
             activity
         });
+    });
+}
+function deleteAct(req, res) {
+    Activity.findByIdAndDelete(req.params.id, function(err) {
+        res.redirect('/activities');
     });
 }
 
@@ -52,8 +57,3 @@ function newAct(req, res) {
 }
 
 // this one should be good
-function deleteAct(req, res) {
-    Activity.findOneAndDelete(req.params.id, function(err) {
-        res.redirect('/activities');
-    });
-}
