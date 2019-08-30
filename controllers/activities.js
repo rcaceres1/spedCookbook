@@ -44,7 +44,7 @@ function add(req,res) {
 
 /// This will need to be refactored 
 function update(req, res) {
-    Activity.findOneAndUpdate(req.params.id, req.body, function(err, activity) {
+    Activity.findByIdAndUpdate(req.params.id, req.body, function(err, activity) {
         res.redirect(`/activities/${req.params.id}`)
     });
 }
